@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<!-- ===================================================================== -->
+<!--                                                                       -->
+<!--  Log4j Configuration                                                  -->
+<!--                                                                       -->
+<!-- ===================================================================== -->
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
+	debug="false">
+	
+	<!-- TODO: remove  <appender-ref ref="CONSOLE" /> from the different categories-->
+
+	<!-- ============================== -->
+	<!-- Append messages to the console -->
+	<!-- ============================== -->
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%p %x %c - %m%n" />
+		</layout>
+	</appender>
+
+	<!-- ============================== -->
+	<!-- Append messages to log file -->
+	<!-- ============================== -->
+	<appender name="SDDLOG"
+		class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Append" value="true" />
+		<param name="File" value="target/sdd.log" />
+		<param name="Threshold" value="DEBUG" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%d{ISO8601} %-5p %x %c - %m%n" />
+		</layout>
+	</appender>
+
+	<!-- ================ -->
+	<!-- Configured log categories -->
+	<!-- ================ -->
+
+
+	<!-- Log Strut warnings and errors to the SDD logfile -->
+	<category name="org.apache.struts" additivity="false">
+		<priority value="WARN" />
+		<appender-ref ref="SDDLOG" />
+		<!--appender-ref ref="CONSOLE" /-->
+	</category>
+
+	<!-- To log ServletExceptions -->
+	<category name="org.apache.catalina.core.ContainerBase"
+		additivity="false">
+		<priority value="ERROR" />
+		<appender-ref ref="SDDLOG" />
+		<!--appender-ref ref="CONSOLE" /-->
+	</category>
+
+	<!-- Log Spring warnings and errors to the SDD logfile. Log debugs and higher to the console during development-->
+	<category name="org.springframework" additivity="false">
+		<priority value="WARN" />
+		<appender-ref ref="SDDLOG" />
+		<!--appender-ref ref="CONSOLE" /-->
+	</category>
+
+	<!-- Log Hibernate warnings and errors to the SDD logfile. Log debugs and higher to the console during development-->
+	<category name="org.hibernate" additivity="false">
+		<priority value="WARN" />
+		<appender-ref ref="SDDLOG" />
+		<!--appender-ref ref="CONSOLE" /-->
+	</category>
+	
+	
+		<!-- Log Hibernate warnings and errors to the SDD logfile. Log debugs and higher to the console during development-->
+	<category name="org.apache" additivity="false">
+		<priority value="WARN" />
+		<appender-ref ref="SDDLOG" />
+		<!--appender-ref ref="CONSOLE" /-->
+	</category>
+
+	<!-- ======================= -->
+	<!-- Setup the Root category -->
+	<!-- ======================= -->
+	<root>
+		<priority value="INFO" />
+		<appender-ref ref="CONSOLE" />
+		<!--appender-ref ref="SDDLOG" /-->
+	</root>
+</log4j:configuration>
