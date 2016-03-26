@@ -1,0 +1,2 @@
+A small extension to JAXB to allow the inserting of persistent methods. It allows you to add a small about of XML to the schema that will be used to invoke a static method on a class that you create.
+For example your XML defines an Order this will allow you to add a method that will get the getOrderItemsTotals for example. This code is separated from the generated code so will not be lost on regeneration of the beans
